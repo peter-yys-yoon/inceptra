@@ -23,6 +23,12 @@ from typing import Optional, List
 
 BN_MOMENTUM = 0.1
 logger = logging.getLogger(__name__)
+########################################################################## HERE
+
+
+########################################################################## HERE
+
+
 
 
 def conv3x3(in_planes, out_planes, stride=1):
@@ -146,6 +152,7 @@ class TransPoseR(nn.Module):
         d_hidden = cfg.MODEL.DIM_FEEDFORWARD
         n_blocks = cfg.MODEL.NUM_BLOCKS
         n_heads = cfg.MODEL.NUM_HEADS
+        n_stage = cfg.MODEL.NUM_STAGE
         hidden_size_list = cfg.MODEL.HIDDEN_SIZE
         group_size_list = cfg.MODEL.GROUP_SIZE
         qkv_bias=True 
@@ -157,8 +164,10 @@ class TransPoseR(nn.Module):
         normalize_before=False
         return_atten_map=False
 
-        return Inceptra(d_model, d_hidden,n_blocks, n_heads, hidden_size_list, group_size_list, qkv_bias,
-                        qk_scale, 
+        assert (n_stage == len(hidden_size_list)), 'Number of parameters are not same as # of stages'
+
+        return Inceptra(d_model, d_hidden,n_stage, n_blocks, n_heads, hidden_size_list, 
+                        group_size_list, qkv_bias, qk_scale, 
                         drop_rate, attn_drop_rate, drop_path_rate,
                         activation, normalize_before, return_atten_map)
 
@@ -235,7 +244,9 @@ class TransPoseR(nn.Module):
         x = x.flatten(2).permute(2, 0, 1)
         print('inceptra input', x.shape)
         x = self.inceptra(x)
+        print('inceptra output', x.shape)
         x = x.permute(1, 2, 0).contiguous().view(bs, c, h, w)
+        print('xx', x.shape)
         x = self.deconv_layers(x)
         x = self.final_layer(x)
 

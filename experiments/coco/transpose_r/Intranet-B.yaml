@@ -23,11 +23,12 @@ DATASET:
   TEST_SET: 'val2017'
   TRAIN_SET: 'train2017'
 MODEL:
-  NUM_BLOCKS: [ 3]
-  NUM_HEADS: [ 4]
-  # GROUP_SIZE: [ [16,4], [8,2]]
-  GROUP_SIZE: [ [8,4]]
-  HIDDEN_SIZE: [ [32,24]]
+  NUM_STAGE: 2
+  NUM_BLOCKS: [ 3,3]
+  NUM_HEADS: [ 4,4]
+  GROUP_SIZE: [ [8,4], [4,2]]
+  # GROUP_SIZE: [ [8,4]]
+  HIDDEN_SIZE: [ [32,24], [32,24]]
 
   # DEPTHS: [ 2, 2, 5, 2 ]
   # NUM_HEADS: [ 4, 8, 16, 32 ]

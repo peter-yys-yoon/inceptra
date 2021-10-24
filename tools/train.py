@@ -252,13 +252,14 @@ def testing():
         cfg, is_train=True
     )
     # print(model)
-    model.to("cuda:0")
+    # model.to("cuda:0")
     # summary(model, (100,3,256,192))
-    summary(model, (3,256,192))
-    # x = torch.ones(1,3,256,192)
-    # y = model(x)
+    # summary(model, (3,256,192))
+    x = torch.ones(1,3,256,192)
+    # x = torch.ones(1,256,32,24)
+    y = model(x)
     # print(y.shape)
-    # print('-END-')
+    print('-END-')
     # print(model)
 
 
