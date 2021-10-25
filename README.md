@@ -1,3 +1,90 @@
+## Getting started
+
+### Installation
+
+
+#### Environments
+
+1. python environment
+exlcude cocoapi before intsalling requirements.
+
+```
+pip install torchsummary tqdm
+pip install -r requirements.txt
+```
+
+2. install cocoapi in switchablenorms/DeepFashion2
+install cocoapi from pip if 'make install' is not working
+
+```
+git clone https://github.com/switchablenorms/DeepFashion2 
+cd DeepFashion2/deepfashion2_api/PythonAPI/ 
+make install
+
+```
+
+
+#### Dataset
+
+
+1. download DeepFashion2 
+2. generate coco-type json(e.g., train.json) file
+```
+python ./lib/datasets/deepfashion2_to_coco.py
+```
+
+3. Generate 81kps with 'dataset_agg81kps.py' and 'deepfashion2agg81kps_util.py' from [lzhbrian/deepfashion2-kps-agg-finetune](https://github.com/lzhbrian/deepfashion2-kps-agg-finetune)
+
+```
+cd $PROJECT$/lib/dataset
+python dataset_agg81.kps.py
+```
+
+
+Construct Directory like below:
+```
+data
+├── deepfashion2
+│   ├── annotations
+│   │   ├── train_debug.json
+│   │   ├── train.json
+│   │   ├── validation_debug.json
+│   │   └── validation.json
+│
+├── deepfashion2agg81kps
+│   └── annotations
+│       ├── train_debug.json
+│       ├── train.json
+│       ├── validation_debug.json
+│       └── validation.json
+
+```
+
+Create COCO-type annotations with evaluation/deepfashion2_to_coco.py 
+Create 81kps dataset with agg-finetune/HRNet-Human-Pose-Estimation/scripts/dataset_agg81kps.py
+
+
+
+
+#### SOURCE Code
+
+1. copy following classees under ./lib/dataset
+- deepfashion2 
+- deepfashion2agg81kps
+- deepfashion2agg81kps_util.py
+
+2. Append following definition at ./lib/dataset/__init__.py
+```
+from .deepfashion2 import Deepfashion2Dataset as deepfashion2
+from .deepfashion2agg81kps import Deepfashion2Agg81KpsDataset as deepfashion2agg81kps
+```
+
+
+
+
+-------------------------------------------------------------------------------------
+
+
 ## Introduction
 
 **[TransPose](https://arxiv.org/abs/2012.14214)** is a human pose estimation model based on a CNN feature extractor, a Transformer Encoder, and a prediction head. Given an image, the attention layers built in Transformer can efficiently capture long-range spatial relationships between keypoints and explain what dependencies the predicted keypoints locations highly rely on. 

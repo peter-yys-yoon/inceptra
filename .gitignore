@@ -129,3 +129,5 @@ dmypy.json
 
 output/
 log/
+data/
+DeepFashion2/
