@@ -9,7 +9,7 @@
 exlcude cocoapi before intsalling requirements.
 
 ```
-pip install torchsummary tqdm
+pip install torchsummary tqdm numpy=1.17.0
 pip install -r requirements.txt
 ```
 
@@ -77,9 +77,38 @@ from .deepfashion2 import Deepfashion2Dataset as deepfashion2
 from .deepfashion2agg81kps import Deepfashion2Agg81KpsDataset as deepfashion2agg81kps
 ```
 
+3. Minor update to use DeepFashion2
+
+- lib/dataset/JointDataset.py, line 201
+```
+        meta = {
+            'image': image_file,
+            'filename': filename,
+            'imgnum': imgnum,
+            'joints': joints,
+            'joints_vis': joints_vis,
+            **'cls_ind': db_rec['cls_ind'], # lzhbrian: we also need to know this **
+            'center': c,
+            'scale': s,
+            'rotation': r,
+            'score': score
+        }
+
+```
 
 
+- lib/core/function.py, line 118
+```
+   all_cls_ind = []
+```
 
+- lib/core/function.py, line 198
+```
+name_values, perf_indicator = val_dataset.evaluate(
+            config, all_preds, **all_cls_ind** ,output_dir, all_boxes, image_path,
+            filenames, imgnums
+        )
+```
 -------------------------------------------------------------------------------------
 
 

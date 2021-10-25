@@ -199,6 +199,7 @@ class JointsDataset(Dataset):
             'imgnum': imgnum,
             'joints': joints,
             'joints_vis': joints_vis,
+            'cls_ind': db_rec['cls_ind'], # lzhbrian: we also need to know this
             'center': c,
             'scale': s,
             'rotation': r,

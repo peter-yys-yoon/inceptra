@@ -113,6 +113,8 @@ def validate(config, val_loader, val_dataset, model, criterion, output_dir,
     image_path = []
     filenames = []
     imgnums = []
+    all_cls_ind = []
+
     idx = 0
     with torch.no_grad():
         end = time.time()
@@ -174,6 +176,7 @@ def validate(config, val_loader, val_dataset, model, criterion, output_dir,
             all_boxes[idx:idx + num_images, 4] = np.prod(s*200, 1)
             all_boxes[idx:idx + num_images, 5] = score
             image_path.extend(meta['image'])
+            all_cls_ind.extend(meta['cls_ind'])
 
             idx += num_images
 
@@ -193,7 +196,7 @@ def validate(config, val_loader, val_dataset, model, criterion, output_dir,
                                   prefix)
 
         name_values, perf_indicator = val_dataset.evaluate(
-            config, all_preds, output_dir, all_boxes, image_path,
+            config, all_preds, all_cls_ind, output_dir, all_boxes, image_path,
             filenames, imgnums
         )
 
