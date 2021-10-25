@@ -20,7 +20,6 @@ install cocoapi from pip if 'make install' is not working
 git clone https://github.com/switchablenorms/DeepFashion2 
 cd DeepFashion2/deepfashion2_api/PythonAPI/ 
 make install
-
 ```
 
 
@@ -57,7 +56,6 @@ data
 │       ├── train.json
 │       ├── validation_debug.json
 │       └── validation.json
-
 ```
 
 Create COCO-type annotations with evaluation/deepfashion2_to_coco.py 

@@ -36,6 +36,10 @@ class JointsDataset(Dataset):
         self.is_train = is_train
         self.root = root
         self.image_set = image_set
+        # print('here image_set', image_set )
+        # print('here debug', cfg.DEBUG.DEBUG)
+        # quit()
+        
 
         self.output_path = cfg.OUTPUT_DIR
         self.data_format = cfg.DATASET.DATA_FORMAT
@@ -114,6 +118,7 @@ class JointsDataset(Dataset):
     def __getitem__(self, idx):
         db_rec = copy.deepcopy(self.db[idx])
 
+        
         image_file = db_rec['image']
         filename = db_rec['filename'] if 'filename' in db_rec else ''
         imgnum = db_rec['imgnum'] if 'imgnum' in db_rec else ''

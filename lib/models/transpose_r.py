@@ -230,6 +230,7 @@ class TransPoseR(nn.Module):
         return nn.Sequential(*layers)
 
     def forward(self, x):
+        # print('inpux x', x.shape)
         x = self.conv1(x)
         x = self.bn1(x)
         x = self.relu(x)
@@ -238,15 +239,15 @@ class TransPoseR(nn.Module):
         x = self.layer1(x)
         x = self.layer2(x)
         x = self.reduce(x)
-        print('reduce', x.shape)
+        # print('reduce', x.shape)
 
         bs, c, h, w = x.shape
         x = x.flatten(2).permute(2, 0, 1)
-        print('inceptra input', x.shape)
+        # print('inceptra input', x.shape)
         x = self.inceptra(x)
-        print('inceptra output', x.shape)
+        # print('inceptra output', x.shape)
         x = x.permute(1, 2, 0).contiguous().view(bs, c, h, w)
-        print('xx', x.shape)
+        # print('xx', x.shape)
         x = self.deconv_layers(x)
         x = self.final_layer(x)
 

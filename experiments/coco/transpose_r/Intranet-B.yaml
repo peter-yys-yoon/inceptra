@@ -4,7 +4,7 @@ CUDNN:
   DETERMINISTIC: false
   ENABLED: true
 DATA_DIR: ''
-GPUS: (0,)
+GPUS: (0,1,2,3)
 OUTPUT_DIR: 'output'
 LOG_DIR: 'log'
 WORKERS: 24
@@ -12,16 +12,16 @@ PRINT_FREQ: 100
 
 DATASET:
   COLOR_RGB: true
-  DATASET: 'coco'
+  DATASET: 'deepfashion2'
   DATA_FORMAT: jpg
   FLIP: true
   NUM_JOINTS_HALF_BODY: 8
-  PROB_HALF_BODY: 0.3
-  ROOT: 'data/coco/'
-  ROT_FACTOR: 45
-  SCALE_FACTOR: 0.35
-  TEST_SET: 'val2017'
-  TRAIN_SET: 'train2017'
+  PROB_HALF_BODY: 0.0
+  ROOT: 'data/deepfashion2'
+  ROT_FACTOR: 30
+  SCALE_FACTOR: 0.25
+  TEST_SET: 'validation'
+  TRAIN_SET: 'train'
 MODEL:
   NUM_STAGE: 2
   NUM_BLOCKS: [ 3,3]
@@ -34,8 +34,8 @@ MODEL:
   # NUM_HEADS: [ 4, 8, 16, 32 ]
   # GROUP_SIZE: [ [16,8,1], [8,4,1], [4,2,1], [2,1]]
   # Transformer Encoder
-  DIM_MODEL: 256
-  DIM_FEEDFORWARD: 1024
+  DIM_MODEL: 192
+  DIM_FEEDFORWARD: 384
   N_HEAD: 8
   ENCODER_LAYERS: 3
   ATTENTION_ACTIVATION: relu
@@ -50,14 +50,14 @@ MODEL:
   - 48
   - 64
   SIGMA: 2
-  NUM_JOINTS: 17
+  NUM_JOINTS: 294
   TARGET_TYPE: 'gaussian'
   EXTRA:
     FINAL_CONV_KERNEL: 1
     DECONV_WITH_BIAS: false
     NUM_DECONV_LAYERS: 1
     NUM_DECONV_FILTERS:
-    - 256
+    - 192
     NUM_DECONV_KERNELS:
     - 4
     NUM_LAYERS: 50

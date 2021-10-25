@@ -1,4 +1,4 @@
-pycocotools
+# pycocotools
 EasyDict==1.7
 opencv-python
 shapely

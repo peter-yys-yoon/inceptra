@@ -8,5 +8,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from .mpii import MPIIDataset as mpii
-from .coco import COCODataset as coco
+# from .mpii import MPIIDataset as mpii
+# from .coco import COCODataset as coco
+
+
+from .deepfashion2 import Deepfashion2Dataset as deepfashion2
+from .deepfashion2agg81kps import Deepfashion2Agg81KpsDataset as deepfashion2agg81kps

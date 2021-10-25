@@ -92,9 +92,9 @@ class Attention(nn.Module):
         """
         B_, N, C = x.shape
         qkv = self.qkv(x).reshape(B_, N, 3, self.num_heads, C // self.num_heads).permute(2, 0, 3, 1, 4)
-        print('qkv.shape' , qkv.shape)
+        # print('qkv.shape' , qkv.shape)
         q, k, v = qkv[0], qkv[1], qkv[2]  # make torchscript happy (cannot use tensor as tuple)
-        print('q.shape',q.shape)
+        # print('q.shape',q.shape)
 
         q = q * self.scale
         attn = (q @ k.transpose(-2, -1))
@@ -315,9 +315,6 @@ class Inceptra(nn.Module):
                  drop_rate=0., attn_drop_rate=0., drop_path_rate=0.1,
                  activation="relu", normalize_before=False, return_atten_map=False):
         super().__init__()
-
-        
-        self.fc1 = nn.Linear(256, 512)
 
         self.stages = nn.ModuleList()
         for si in range(n_stage):
